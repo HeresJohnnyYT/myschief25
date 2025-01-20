@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Myschief</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Jost:wght@200;300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --page-bg: #ffffff;
+            --text: #000000;
+            --accent: #333333;
+        }
+
+        @keyframes subtleBreathing {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.001); }
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--page-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Jost', sans-serif;
+            color: var(--text);
+            padding: 60px 20px;
+            overflow-x: hidden;
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: multiply;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 8rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .backdrop {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, 
+                rgba(255,255,255,0.5), 
+                rgba(255,255,255,0.8), 
+                rgba(255,255,255,0.5)
+            );
+            filter: blur(100px);
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 5vw;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-align: center;
+            margin-bottom: 6rem;
+            position: relative;
+            text-transform: uppercase;
+            animation: subtleBreathing 4s ease-in-out infinite;
+        }
+
+        .image-section {
+            position: relative;
+            margin: 0 auto;
+            max-width: 1400px;
+            perspective: 1000px;
+        }
+
+        .image-container {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .image-frame {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2px;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.05),
+                0 0 30px rgba(0,0,0,0.02);
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: translateZ(0);
+            filter: contrast(1.02) brightness(1.02);
+        }
+
+        .floating-elements {
+            position: absolute;
+            inset: -100px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at center, 
+                rgba(255,255,255,0.8), 
+                transparent 70%
+            );
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: float 20s infinite linear;
+        }
+
+        .element1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .element2 { top: 60%; right: 20%; animation-delay: -5s; }
+        .element3 { bottom: 20%; left: 30%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, 30px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        footer {
+            text-align: center;
+            font-weight: 200;
+            letter-spacing: 0.3em;
+            margin-top: 6rem;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .divider {
+            width: 1px;
+            height: 20px;
+            background: var(--accent);
+            opacity: 0.2;
+            display: inline-block;
+            margin: 0 2rem;
+            transform: rotate(20deg);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 4rem 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .image-frame {
+                padding: 20px;
+            }
+
+            .divider {
+                margin: 0 1rem;
+            }
+        }
+
+        .mouse-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            background: radial-gradient(
+                circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255,255,255,0.1),
+                transparent 100%
+            );
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageContainer = document.querySelector('.image-container');
+            const mouseOverlay = document.querySelector('.mouse-overlay');
+            
+            let bounds = {};
+            let mousePosition = { x: 0, y: 0 };
+
+            function updateBounds() {
+                bounds = imageContainer.getBoundingClientRect();
+            }
+
+            function handleMouseMove(e) {
+                mousePosition.x = e.clientX;
+                mousePosition.y = e.clientY;
+
+                // Update mouse overlay
+                mouseOverlay.style.setProperty('--mouse-x', `${e.clientX}px`);
+                mouseOverlay.style.setProperty('--mouse-y', `${e.clientY}px`);
+
+                // Update image container perspective
+                if (bounds.width) {
+                    const centerX = bounds.left + bounds.width / 2;
+                    const centerY = bounds.top + bounds.height / 2;
+                    const percentX = (mousePosition.x - centerX) / (bounds.width / 2);
+                    const percentY = (mousePosition.y - centerY) / (bounds.height / 2);
+                    
+                    const rotateX = percentY * -5;
+                    const rotateY = percentX * 5;
+
+                    imageContainer.style.transform = `
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY}deg)
+                    `;
+                }
+            }
+
+            window.addEventListener('resize', updateBounds);
+            window.addEventListener('scroll', updateBounds);
+            window.addEventListener('mousemove', handleMouseMove);
+            updateBounds();
+        });
+    </script>
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="mouse-overlay"></div>
+    <div class="container">
+        <div class="content">
+            <div class="backdrop"></div>
+            <div class="floating-elements">
+                <div class="floating-element element1"></div>
+                <div class="floating-element element2"></div>
+                <div class="floating-element element3"></div>
+            </div>
+            <div class="inner-content">
+                <h1>Myschief</h1>
+                <div class="image-section">
+                    <div class="image-container">
+                        <div class="image-frame">
+                            <img src="https://scontent-ord5-3.xx.fbcdn.net/v/t39.30808-6/242079396_10159778028034083_1638624113462830914_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tiEWAs5mmigQ7kNvgGUCTEQ&_nc_zt=23&_nc_ht=scontent-ord5-3.xx&_nc_gid=ATIZEUoZ_pOBvBR4YYN04hs&oh=00_AYB6kZ8aAnBMFn532M5nhvljz9wCqMv13V2q1LAphjVRhQ&oe=67944941" alt="Myschief lounging on a leather chair">
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <i class="fas fa-cat"></i>
+                    <span class="divider"></span>
+                    © 2025 Myschief
+                    <span class="divider"></span>
+                    <i class="fas fa-cat"></i>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
