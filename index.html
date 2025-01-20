@@ -61,6 +61,7 @@
             padding: 8rem 4rem;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .inner-content {
@@ -82,7 +83,7 @@
 
         h1 {
             font-family: 'Syncopate', sans-serif;
-            font-size: 5vw;
+            font-size: clamp(2rem, 5vw, 4rem);
             font-weight: 400;
             letter-spacing: 0.2em;
             text-align: center;
@@ -189,6 +190,28 @@
 
             .divider {
                 margin: 0 1rem;
+            }
+
+            .floating-elements {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 40px 10px;
+            }
+
+            .content {
+                padding: 3rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            footer {
+                font-size: 0.8rem;
             }
         }
 
