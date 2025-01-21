@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myschief</title>
+    <script>
+        // Mobile detection and redirect
+        (function() {
+            // Check if the device is mobile
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // Redirect if it's a mobile device
+            if (isMobile) {
+                window.location.href = 'https://myschiefthecat.net/mobile.html';
+            }
+        })();
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.min.css" rel="stylesheet">
     <style>
         :root {
