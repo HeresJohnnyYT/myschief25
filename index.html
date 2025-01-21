@@ -16,18 +16,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #0a0a0a;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1c1c1c;
+            font-family: 'Arial', sans-serif;
             color: #fff;
             overflow: hidden;
             perspective: 1000px;
             position: relative;
+            background: linear-gradient(to bottom, #0e0e0e, #3a3a3a);
         }
 
         .film-grain {
             position: fixed;
             inset: 0;
-            opacity: .08;
+            opacity: .1;
             pointer-events: none;
             background: url('data:image/svg+xml,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
             transform: translateZ(0);
@@ -39,22 +40,21 @@
             padding: 2rem;
             background: linear-gradient(145deg, #141414, #0f0f0f);
             border-radius: 24px;
-            box-shadow: 
-                0 30px 60px -12px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(255, 255, 255, 0.03);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.03);
             transform-style: preserve-3d;
             transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .title {
-            font-size: 1.35rem;
-            font-weight: 400;
+            font-size: 1.75rem;
+            font-weight: 600;
             letter-spacing: 0.25em;
             text-align: center;
             margin-bottom: 1.75rem;
             color: rgba(255, 255, 255, 0.85);
             text-transform: uppercase;
             position: relative;
+            font-family: 'Georgia', serif;
         }
 
         .title::after {
@@ -65,10 +65,7 @@
             transform: translateX(-50%);
             width: 40px;
             height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.3), 
-                transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
         }
 
         .image-wrapper {
@@ -77,9 +74,7 @@
             overflow: hidden;
             background: #000;
             transform-style: preserve-3d;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05);
             cursor: pointer;
         }
 
@@ -99,31 +94,18 @@
         }
 
         .image-wrapper::before {
-            background: linear-gradient(
-                to bottom,
-                transparent,
-                rgba(0, 0, 0, 0.2)
-            );
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
             z-index: 1;
         }
 
         .image-wrapper::after {
-            background: linear-gradient(
-                45deg,
-                rgba(255, 255, 255, 0.1) 0%,
-                transparent 50%,
-                rgba(255, 255, 255, 0.1) 100%
-            );
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
             opacity: 0;
             z-index: 2;
         }
 
         .container:hover {
-            transform: 
-                perspective(1000px) 
-                rotateX(2deg) 
-                rotateY(2deg) 
-                translateZ(10px);
+            transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateZ(10px);
         }
 
         .container:hover .image-wrapper::after {
@@ -134,70 +116,122 @@
             transform: scale(1.03);
         }
 
-        @keyframes snow {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 0;
-            }
-            30% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0.5;
-            }
+        .snowfall {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: snow 10s linear infinite;
         }
 
         .snowflake {
-            position: fixed;
+            position: absolute;
             top: -10px;
-            color: #ffffff;
-            font-size: 1.2rem;
-            animation: snow 3s linear infinite; /* Faster snow */
+            color: #fff;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            animation: fall 10s linear infinite;
         }
 
-        .snowflake:nth-child(odd) {
-            animation-duration: 2.5s;
+        @keyframes snow {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100vw);
+            }
         }
 
-        .snowflake:nth-child(even) {
-            animation-duration: 2.8s;
+        @keyframes fall {
+            0% {
+                top: -10px;
+                opacity: 0.8;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0.2;
+            }
         }
 
-        .snowflake:nth-child(1) { left: 10%; }
-        .snowflake:nth-child(2) { left: 20%; }
-        .snowflake:nth-child(3) { left: 30%; }
-        .snowflake:nth-child(4) { left: 40%; }
-        .snowflake:nth-child(5) { left: 50%; }
-        .snowflake:nth-child(6) { left: 60%; }
-        .snowflake:nth-child(7) { left: 70%; }
-        .snowflake:nth-child(8) { left: 80%; }
-        .snowflake:nth-child(9) { left: 90%; }
-        .snowflake:nth-child(10) { left: 100%; }
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            z-index: 1000;
+            color: white;
+        }
+
+        .modal button {
+            background-color: #008cba;
+            color: white;
+            border: none;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #005f73;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
     <div class="film-grain"></div>
-    
-    <!-- Snowflakes -->
-    <div class="snowflake" style="animation-duration: 2.5s; left: 10%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.8s; left: 20%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3s; left: 30%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.5s; left: 40%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.7s; left: 50%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3.2s; left: 60%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3.5s; left: 70%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.6s; left: 80%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.9s; left: 90%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3.1s; left: 100%;">❄️</div>
 
     <div class="container">
-        <h1 class="title">Myschief</h1>
-        <div class="image-wrapper" onclick="window.location.href='mailto:contact@myschiefthecat.net'">
-            <img class="image" 
-                 src="https://scontent-ord5-3.xx.fbcdn.net/v/t39.30808-6/242079396_10159778028034083_1638624113462830914_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tiEWAs5mmigQ7kNvgGUCTEQ&_nc_zt=23&_nc_ht=scontent-ord5-3.xx&_nc_gid=AWtuGIny9SuDYXLWJR1Q4Vi&oh=00_AYB1Ahu289KdjBeSepqj7Hkonxq2YqSB9wR5XjZRV6w73g&oe=6794F201" 
-                 alt="Myschief">
+        <h1 class="title">Myschief - Winter Wonderland</h1>
+        <div class="image-wrapper" onclick="openModal()">
+            <img class="image" src="https://i.ibb.co/SNxqvdX/242079396-10159778028034083-1638624113462830914-n-1.jpg" alt="Myschief">
         </div>
     </div>
+
+    <!-- Snowfall -->
+    <div class="snowfall">
+        <div class="snowflake" style="left: 10%; animation-duration: 8s;"></div>
+        <div class="snowflake" style="left: 30%; animation-duration: 7s;"></div>
+        <div class="snowflake" style="left: 50%; animation-duration: 6s;"></div>
+        <div class="snowflake" style="left: 70%; animation-duration: 9s;"></div>
+        <div class="snowflake" style="left: 90%; animation-duration: 5s;"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="overlay" id="modalOverlay"></div>
+    <div class="modal" id="modalWindow">
+        <h3>What would you like to do?</h3>
+        <button onclick="window.location.href='mailto:contact@myschiefthecat.net'">Contact Us</button>
+        <button onclick="window.location.href='https://myschiefthecat.net/gallery'">Go to Gallery</button>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('modalWindow').style.display = 'block';
+            document.getElementById('modalOverlay').style.display = 'block';
+        }
+
+        document.getElementById('modalOverlay').addEventListener('click', function() {
+            document.getElementById('modalWindow').style.display = 'none';
+            document.getElementById('modalOverlay').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
