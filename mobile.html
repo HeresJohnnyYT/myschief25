@@ -120,11 +120,25 @@
             display: block;
             width: 100%;
             height: auto;
+            transition: opacity 1.5s ease-in-out;
         }
 
-        .image-wrapper:active {
-            transform: scale(0.98);
-            transition: transform 0.2s ease;
+        .image-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .show-alternate .image {
+            opacity: 0;
+        }
+
+        .show-alternate .image-hover {
+            opacity: 1;
         }
 
         .modal {
@@ -263,8 +277,9 @@
             </a>
         </header>
 
-        <div class="image-wrapper" onclick="showModal()">
+        <div class="image-wrapper" id="imageWrapper">
             <img class="image" src="https://scontent-ord5-3.xx.fbcdn.net/v/t39.30808-6/242079396_10159778028034083_1638624113462830914_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tiEWAs5mmigQ7kNvgGUCTEQ&_nc_zt=23&_nc_ht=scontent-ord5-3.xx&_nc_gid=AWtuGIny9SuDYXLWJR1Q4Vi&oh=00_AYB1Ahu289KdjBeSepqj7Hkonxq2YqSB9wR5XjZRV6w73g&oe=6794F201" alt="Myschief">
+            <img class="image-hover" src="/2.png" alt="Myschief Alternate">
         </div>
     </div>
 
@@ -279,6 +294,27 @@
     </div>
 
     <script>
+        let isAlternateVisible = false;
+        const imageWrapper = document.getElementById('imageWrapper');
+        
+        imageWrapper.addEventListener('click', function(e) {
+            if (!isAlternateVisible) {
+                // If we're showing the main image, first toggle the alternate
+                imageWrapper.classList.add('show-alternate');
+                isAlternateVisible = true;
+                
+                // Wait for transition before allowing modal
+                setTimeout(() => {
+                    showModal();
+                    // Reset back to main image
+                    imageWrapper.classList.remove('show-alternate');
+                    isAlternateVisible = false;
+                }, 1500);
+            } else {
+                showModal();
+            }
+        });
+
         function showModal() {
             document.getElementById('modal').style.display = 'flex';
         }
