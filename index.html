@@ -134,6 +134,50 @@
             transform: scale(1.03);
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #141414;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .modal button {
+            background: #ff7f50;
+            color: #fff;
+            padding: 0.5rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0 1rem;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .modal button:hover {
+            background-color: #ff4500;
+        }
+
+        /* Snowflake animation */
         @keyframes snow {
             0% {
                 transform: translateY(-100vh) rotate(0deg);
@@ -153,75 +197,13 @@
             top: -10px;
             color: #ffffff;
             font-size: 1.2rem;
-            animation: snow 3s linear infinite; /* Faster snow */
+            animation: snow 3s linear infinite;
         }
-
-        .snowflake:nth-child(odd) {
-            animation-duration: 2.5s;
-        }
-
-        .snowflake:nth-child(even) {
-            animation-duration: 2.8s;
-        }
-
-        .snowflake:nth-child(1) { left: 10%; }
-        .snowflake:nth-child(2) { left: 20%; }
-        .snowflake:nth-child(3) { left: 30%; }
-        .snowflake:nth-child(4) { left: 40%; }
-        .snowflake:nth-child(5) { left: 50%; }
-        .snowflake:nth-child(6) { left: 60%; }
-        .snowflake:nth-child(7) { left: 70%; }
-        .snowflake:nth-child(8) { left: 80%; }
-        .snowflake:nth-child(9) { left: 90%; }
-        .snowflake:nth-child(10) { left: 100%; }
-
-        /* Modal styles */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 600px;
-            color: #000;
-        }
-
-        .modal-header {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .modal-body {
-            margin-top: 10px;
-            font-size: 1.1rem;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 2rem;
-            color: #000;
-            cursor: pointer;
-        }
-
     </style>
 </head>
 <body>
     <div class="film-grain"></div>
-    
+
     <!-- Snowflakes -->
     <div class="snowflake" style="animation-duration: 2.5s; left: 10%;">❄️</div>
     <div class="snowflake" style="animation-duration: 2.8s; left: 20%;">❄️</div>
@@ -236,7 +218,7 @@
 
     <div class="container">
         <h1 class="title">Myschief</h1>
-        <div class="image-wrapper" onclick="openModal()">
+        <div class="image-wrapper" onclick="showModal()">
             <img class="image" 
                  src="https://scontent-ord5-3.xx.fbcdn.net/v/t39.30808-6/242079396_10159778028034083_1638624113462830914_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tiEWAs5mmigQ7kNvgGUCTEQ&_nc_zt=23&_nc_ht=scontent-ord5-3.xx&_nc_gid=AWtuGIny9SuDYXLWJR1Q4Vi&oh=00_AYB1Ahu289KdjBeSepqj7Hkonxq2YqSB9wR5XjZRV6w73g&oe=6794F201" 
                  alt="Myschief">
@@ -244,34 +226,21 @@
     </div>
 
     <!-- Modal -->
-    <div id="myModal" class="modal">
+    <div id="modal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>Contact Myschief</h2>
-            </div>
-            <div class="modal-body">
-                <p>Click the button below to send an email to Myschief:</p>
-                <a href="mailto:contact@myschiefthecat.net">Send Email</a>
-            </div>
+            <h2>Do you want to contact us via email?</h2>
+            <button onclick="location.href='mailto:contact@myschiefthecat.net'">Yes</button>
+            <button onclick="closeModal()">No</button>
         </div>
     </div>
 
     <script>
-        // Modal functionality
-        function openModal() {
-            document.getElementById("myModal").style.display = "flex";
+        function showModal() {
+            document.getElementById('modal').style.display = 'flex';
         }
 
         function closeModal() {
-            document.getElementById("myModal").style.display = "none";
-        }
-
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            if (event.target == document.getElementById("myModal")) {
-                closeModal();
-            }
+            document.getElementById('modal').style.display = 'none';
         }
     </script>
 </body>
