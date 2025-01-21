@@ -14,167 +14,33 @@
         body {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #0a0a0a;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #182b3e;
+            font-family: 'Arial', sans-serif;
             color: #fff;
             overflow: hidden;
-            perspective: 1000px;
             position: relative;
         }
 
-        .film-grain {
-            position: fixed;
-            inset: 0;
-            opacity: .08;
-            pointer-events: none;
-            background: url('data:image/svg+xml,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
-            transform: translateZ(0);
-        }
-
-        .container {
-            position: relative;
-            width: 350px;
-            padding: 2rem;
-            background: linear-gradient(145deg, #141414, #0f0f0f);
-            border-radius: 24px;
-            box-shadow: 
-                0 30px 60px -12px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(255, 255, 255, 0.03);
-            transform-style: preserve-3d;
-            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .title {
-            font-size: 1.35rem;
-            font-weight: 400;
-            letter-spacing: 0.25em;
-            text-align: center;
-            margin-bottom: 1.75rem;
-            color: rgba(255, 255, 255, 0.85);
-            text-transform: uppercase;
-            position: relative;
-        }
-
-        .title::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -8px;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.3), 
-                transparent);
-        }
-
-        .image-wrapper {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #000;
-            transform-style: preserve-3d;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-        }
-
-        .image {
-            display: block;
-            width: 100%;
-            height: auto;
-            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .container:hover {
-            transform: 
-                perspective(1000px) 
-                rotateX(2deg) 
-                rotateY(2deg) 
-                translateZ(10px);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        .modal-content {
-            background: #1c1c1c;
-            padding: 3rem;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
-            width: 100%;
-            animation: scaleUp 0.3s ease-in-out;
-        }
-
-        .modal h2 {
+        h1 {
+            font-size: 3rem;
             color: #fff;
-            font-size: 2rem;
             margin-bottom: 2rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            text-align: center;
         }
 
-        .modal button {
-            background: linear-gradient(145deg, #ff7f50, #ff4500);
-            color: #fff;
-            padding: 0.75rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 0.75rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+        /* Snowflakes effect */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #ffffff;
+            font-size: 1.5rem;
+            animation: snow 5s linear infinite;
+            pointer-events: none;
         }
 
-        .modal button:hover {
-            background: linear-gradient(145deg, #ff4500, #ff7f50);
-            transform: translateY(-2px);
-        }
-
-        .modal button:active {
-            transform: translateY(2px);
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes scaleUp {
-            0% {
-                transform: scale(0.95);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* Snowflake animation */
         @keyframes snow {
             0% {
                 transform: translateY(-100vh) rotate(0deg);
@@ -189,55 +55,152 @@
             }
         }
 
-        .snowflake {
-            position: fixed;
-            top: -10px;
-            color: #ffffff;
+        /* Main Content */
+        .content {
+            text-align: center;
+        }
+
+        .main-btn {
+            background: linear-gradient(145deg, #0a4c6a, #294f7c);
+            border: none;
+            color: #fff;
             font-size: 1.5rem;
-            animation: snow 3s linear infinite;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .main-btn:hover {
+            background: linear-gradient(145deg, #1a6581, #4c6f8e);
+        }
+
+        /* Modal overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal {
+            background: linear-gradient(145deg, #294f7c, #1f3c5c);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .modal h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .modal p {
+            font-size: 1rem;
+            color: #e1e1e1;
+            margin-bottom: 2rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .modal-button {
+            background-color: #3a6a94;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button:hover {
+            background-color: #5578a3;
+        }
+
+        /* Close button */
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .close-modal:hover {
+            color: #e1e1e1;
         }
     </style>
 </head>
 <body>
-    <div class="film-grain"></div>
-
     <!-- Snowflakes -->
-    <div class="snowflake" style="animation-duration: 2.5s; left: 10%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.8s; left: 20%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3s; left: 30%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.5s; left: 40%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.7s; left: 50%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3.2s; left: 60%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3.5s; left: 70%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.6s; left: 80%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 2.9s; left: 90%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3.1s; left: 100%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 5s; left: 10%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 6s; left: 20%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 4.5s; left: 30%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 5.5s; left: 40%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 5s; left: 50%;">❄️</div>
 
-    <div class="container">
-        <h1 class="title">Myschief</h1>
-        <div class="image-wrapper" onclick="showModal()">
-            <img class="image" 
-                 src="https://scontent-ord5-3.xx.fbcdn.net/v/t39.30808-6/242079396_10159778028034083_1638624113462830914_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tiEWAs5mmigQ7kNvgGUCTEQ&_nc_zt=23&_nc_ht=scontent-ord5-3.xx&_nc_gid=AWtuGIny9SuDYXLWJR1Q4Vi&oh=00_AYB1Ahu289KdjBeSepqj7Hkonxq2YqSB9wR5XjZRV6w73g&oe=6794F201" 
-                 alt="Myschief">
-        </div>
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to Myschief - Winter Wonderland</h1>
+        <button class="main-btn" onclick="showModal()">Contact Us</button>
     </div>
 
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you want to contact Myschief via email?</h2>
-            <button onclick="location.href='mailto:contact@myschiefthecat.net'">Yes</button>
-            <button onclick="closeModal()">No</button>
+    <!-- Modal overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+            <h2>Contact Myschief?</h2>
+            <p>Do you want to contact Myschief via email?</p>
+            <div class="modal-buttons">
+                <button class="modal-button" id="yesBtn">Yes</button>
+                <button class="modal-button" id="noBtn">No</button>
+            </div>
         </div>
     </div>
 
     <script>
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+
+        // Show modal
         function showModal() {
-            document.getElementById('modal').style.display = 'flex';
+            modalOverlay.style.display = 'flex';
         }
 
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
+        // Close modal
+        closeModalBtn.onclick = () => {
+            modalOverlay.style.display = 'none';
+        }
+
+        // Handle Yes button click
+        yesBtn.onclick = () => {
+            window.location.href = 'mailto:contact@myschiefthecat.net';
+        }
+
+        // Handle No button click
+        noBtn.onclick = () => {
+            modalOverlay.style.display = 'none';
         }
     </script>
 </body>
