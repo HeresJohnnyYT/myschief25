@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myschief - Winter Edition</title>
+    <title>Myschief - Winter Wonderland</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
-
         * {
             margin: 0;
             padding: 0;
@@ -18,16 +16,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom, #0a0a0a, #2b3e50);
-            font-family: 'Creepster', cursive;
+            background: #0a0a0a;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             color: #fff;
             overflow: hidden;
+            perspective: 1000px;
+            position: relative;
         }
 
         .film-grain {
             position: fixed;
             inset: 0;
-            opacity: 0.08;
+            opacity: .08;
             pointer-events: none;
             background: url('data:image/svg+xml,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
             transform: translateZ(0);
@@ -89,12 +89,44 @@
             transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
+        .image-wrapper::before,
+        .image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-wrapper::before {
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(0, 0, 0, 0.2)
+            );
+            z-index: 1;
+        }
+
+        .image-wrapper::after {
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+            opacity: 0;
+            z-index: 2;
+        }
+
         .container:hover {
             transform: 
                 perspective(1000px) 
                 rotateX(2deg) 
                 rotateY(2deg) 
                 translateZ(10px);
+        }
+
+        .container:hover .image-wrapper::after {
+            opacity: 1;
         }
 
         .container:hover .image {
@@ -106,7 +138,7 @@
                 transform: translateY(-100vh) rotate(0deg);
                 opacity: 0;
             }
-            50% {
+            30% {
                 opacity: 1;
             }
             100% {
@@ -120,53 +152,46 @@
             top: -10px;
             color: #ffffff;
             font-size: 1.2rem;
-            animation: snow 10s linear infinite;
+            animation: snow 5s linear infinite; /* Faster snow */
         }
 
-        /* Generate multiple snowflakes with unique styles */
+        /* Adjust animation durations for variety */
         .snowflake:nth-child(odd) {
-            animation-duration: 12s;
+            animation-duration: 4s;
         }
 
         .snowflake:nth-child(even) {
-            animation-duration: 8s;
+            animation-duration: 3s;
         }
 
         /* Define positions of snowflakes */
-        .snowflake:nth-child(1) {
-            left: 10%;
-        }
-        .snowflake:nth-child(2) {
-            left: 20%;
-        }
-        .snowflake:nth-child(3) {
-            left: 30%;
-        }
-        .snowflake:nth-child(4) {
-            left: 40%;
-        }
-        .snowflake:nth-child(5) {
-            left: 50%;
-        }
-        .snowflake:nth-child(6) {
-            left: 60%;
-        }
-        .snowflake:nth-child(7) {
-            left: 70%;
-        }
-        .snowflake:nth-child(8) {
-            left: 80%;
-        }
-        .snowflake:nth-child(9) {
-            left: 90%;
-        }
-        .snowflake:nth-child(10) {
-            left: 100%;
-        }
+        .snowflake:nth-child(1) { left: 10%; }
+        .snowflake:nth-child(2) { left: 20%; }
+        .snowflake:nth-child(3) { left: 30%; }
+        .snowflake:nth-child(4) { left: 40%; }
+        .snowflake:nth-child(5) { left: 50%; }
+        .snowflake:nth-child(6) { left: 60%; }
+        .snowflake:nth-child(7) { left: 70%; }
+        .snowflake:nth-child(8) { left: 80%; }
+        .snowflake:nth-child(9) { left: 90%; }
+        .snowflake:nth-child(10) { left: 100%; }
     </style>
 </head>
 <body>
     <div class="film-grain"></div>
+    
+    <!-- Snowflakes -->
+    <div class="snowflake" style="animation-duration: 4s; left: 10%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3s; left: 20%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 5s; left: 30%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 4.5s; left: 40%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3.5s; left: 50%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 5.5s; left: 60%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 6s; left: 70%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 4s; left: 80%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3s; left: 90%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 4.5s; left: 100%;">❄️</div>
+
     <div class="container">
         <h1 class="title">Myschief</h1>
         <div class="image-wrapper">
@@ -175,17 +200,5 @@
                  alt="Myschief">
         </div>
     </div>
-
-    <!-- Snowflakes -->
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❄</div>
 </body>
 </html>
