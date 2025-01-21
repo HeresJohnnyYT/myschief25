@@ -35,8 +35,8 @@
 
         .container {
             position: relative;
-            width: 280px; /* Reduced width */
-            padding: 1.5rem; /* Reduced padding */
+            width: 350px;
+            padding: 2rem;
             background: linear-gradient(145deg, #141414, #0f0f0f);
             border-radius: 24px;
             box-shadow: 
@@ -80,6 +80,7 @@
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.2),
                 0 0 0 1px rgba(255, 255, 255, 0.05);
+            cursor: pointer;
         }
 
         .image {
@@ -173,30 +174,6 @@
         .snowflake:nth-child(8) { left: 80%; }
         .snowflake:nth-child(9) { left: 90%; }
         .snowflake:nth-child(10) { left: 100%; }
-
-        /* Contact button styles */
-        .contact-button {
-            display: inline-block;
-            background-color: #ff6600;
-            color: #fff;
-            font-size: 1rem;
-            padding: 10px 20px;
-            border-radius: 10px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-            margin-top: 2rem;
-        }
-
-        .contact-button:hover {
-            background-color: #e55a00;
-            transform: scale(1.1);
-        }
-
-        .contact-button:active {
-            transform: scale(1);
-        }
     </style>
 </head>
 <body>
@@ -216,12 +193,11 @@
 
     <div class="container">
         <h1 class="title">Myschief</h1>
-        <div class="image-wrapper">
+        <div class="image-wrapper" onclick="window.location.href='mailto:contact@myschiefthecat.net'">
             <img class="image" 
                  src="https://scontent-ord5-3.xx.fbcdn.net/v/t39.30808-6/242079396_10159778028034083_1638624113462830914_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tiEWAs5mmigQ7kNvgGUCTEQ&_nc_zt=23&_nc_ht=scontent-ord5-3.xx&_nc_gid=AWtuGIny9SuDYXLWJR1Q4Vi&oh=00_AYB1Ahu289KdjBeSepqj7Hkonxq2YqSB9wR5XjZRV6w73g&oe=6794F201" 
                  alt="Myschief">
         </div>
-        <a href="mailto:contact@myschiefthecat.net" class="contact-button">Contact Us</a>
     </div>
 </body>
 </html>
