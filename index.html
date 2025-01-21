@@ -152,19 +152,17 @@
             top: -10px;
             color: #ffffff;
             font-size: 1.2rem;
-            animation: snow 5s linear infinite; /* Faster snow */
+            animation: snow 3s linear infinite; /* Faster snow */
         }
 
-        /* Adjust animation durations for variety */
         .snowflake:nth-child(odd) {
-            animation-duration: 4s;
+            animation-duration: 2.5s;
         }
 
         .snowflake:nth-child(even) {
-            animation-duration: 3s;
+            animation-duration: 2.8s;
         }
 
-        /* Define positions of snowflakes */
         .snowflake:nth-child(1) { left: 10%; }
         .snowflake:nth-child(2) { left: 20%; }
         .snowflake:nth-child(3) { left: 30%; }
@@ -175,22 +173,46 @@
         .snowflake:nth-child(8) { left: 80%; }
         .snowflake:nth-child(9) { left: 90%; }
         .snowflake:nth-child(10) { left: 100%; }
+
+        /* Contact button styles */
+        .contact-button {
+            display: inline-block;
+            background-color: #ff6600;
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 2rem;
+        }
+
+        .contact-button:hover {
+            background-color: #e55a00;
+            transform: scale(1.1);
+        }
+
+        .contact-button:active {
+            transform: scale(1);
+        }
     </style>
 </head>
 <body>
     <div class="film-grain"></div>
     
     <!-- Snowflakes -->
-    <div class="snowflake" style="animation-duration: 4s; left: 10%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3s; left: 20%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 5s; left: 30%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 4.5s; left: 40%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3.5s; left: 50%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 5.5s; left: 60%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 6s; left: 70%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 4s; left: 80%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 3s; left: 90%;">❄️</div>
-    <div class="snowflake" style="animation-duration: 4.5s; left: 100%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.5s; left: 10%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.8s; left: 20%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3s; left: 30%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.5s; left: 40%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.7s; left: 50%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3.2s; left: 60%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3.5s; left: 70%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.6s; left: 80%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.9s; left: 90%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3.1s; left: 100%;">❄️</div>
 
     <div class="container">
         <h1 class="title">Myschief</h1>
@@ -199,6 +221,7 @@
                  src="https://scontent-ord5-3.xx.fbcdn.net/v/t39.30808-6/242079396_10159778028034083_1638624113462830914_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tiEWAs5mmigQ7kNvgGUCTEQ&_nc_zt=23&_nc_ht=scontent-ord5-3.xx&_nc_gid=AWtuGIny9SuDYXLWJR1Q4Vi&oh=00_AYB1Ahu289KdjBeSepqj7Hkonxq2YqSB9wR5XjZRV6w73g&oe=6794F201" 
                  alt="Myschief">
         </div>
+        <a href="mailto:contact@myschiefthecat.net" class="contact-button">Contact Us</a>
     </div>
 </body>
 </html>
