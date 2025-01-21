@@ -64,6 +64,31 @@
             align-items: center;
             padding: 1rem 0;
             margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .switch-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .switch-button:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0.95);
         }
 
         .title {
@@ -272,9 +297,12 @@
     <div class="container">
         <header class="header">
             <h1 class="title">Myschief</h1>
-            <a href="https://x.com/myschiefthecat" target="_blank" class="social-link">
-                <img src="https://loodibee.com/wp-content/uploads/Twitter-X-Logo.png" alt="X (Twitter) Logo">
-            </a>
+            <div class="header-actions">
+                <button class="switch-button" onclick="toggleImage()">Switch Image</button>
+                <a href="https://x.com/myschiefthecat" target="_blank" class="social-link">
+                    <img src="https://loodibee.com/wp-content/uploads/Twitter-X-Logo.png" alt="X (Twitter) Logo">
+                </a>
+            </div>
         </header>
 
         <div class="image-wrapper" id="imageWrapper">
@@ -297,22 +325,17 @@
         let isAlternateVisible = false;
         const imageWrapper = document.getElementById('imageWrapper');
         
-        imageWrapper.addEventListener('click', function(e) {
-            if (!isAlternateVisible) {
-                // If we're showing the main image, first toggle the alternate
+        function toggleImage() {
+            isAlternateVisible = !isAlternateVisible;
+            if (isAlternateVisible) {
                 imageWrapper.classList.add('show-alternate');
-                isAlternateVisible = true;
-                
-                // Wait for transition before allowing modal
-                setTimeout(() => {
-                    showModal();
-                    // Reset back to main image
-                    imageWrapper.classList.remove('show-alternate');
-                    isAlternateVisible = false;
-                }, 1500);
             } else {
-                showModal();
+                imageWrapper.classList.remove('show-alternate');
             }
+        }
+        
+        imageWrapper.addEventListener('click', function(e) {
+            showModal();
         });
 
         function showModal() {
