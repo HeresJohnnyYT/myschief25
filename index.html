@@ -16,26 +16,135 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #182b3e;
+            background: #0a0a0a;
             font-family: 'Arial', sans-serif;
             color: #fff;
             overflow: hidden;
             position: relative;
-            background-image: url('https://i.ibb.co/DMZjWsC/20240912-191246.jpg');
-            background-size: cover;
-            background-position: center;
         }
 
-        /* Snowflakes effect */
-        .snowflake {
+        .film-grain {
             position: fixed;
-            top: -10px;
-            color: #ffffff;
-            font-size: 1.5rem;
-            animation: snow 5s linear infinite;
+            inset: 0;
+            opacity: .08;
             pointer-events: none;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            transform: translateZ(0);
         }
 
+        .container {
+            position: relative;
+            width: 350px;
+            padding: 2rem;
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            border-radius: 24px;
+            box-shadow: 
+                0 30px 60px -12px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.03);
+        }
+
+        .title {
+            font-size: 1.35rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 1.75rem;
+            color: #fff;
+            text-transform: lowercase;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+
+        .image {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: all 0.5s ease;
+        }
+
+        .container:hover {
+            transform: 
+                rotateX(2deg) 
+                rotateY(2deg) 
+                translateZ(10px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .modal-content {
+            background: #2a2a2a;
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            animation: scaleUp 0.3s ease-in-out;
+        }
+
+        .modal h2 {
+            color: #fff;
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+        }
+
+        .modal button {
+            background: linear-gradient(145deg, #6db3f2, #1e79c3);
+            color: #fff;
+            padding: 0.75rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+        .modal button:hover {
+            background: linear-gradient(145deg, #1e79c3, #6db3f2);
+            transform: translateY(-2px);
+        }
+
+        .modal button:active {
+            transform: translateY(2px);
+        }
+
+        /* Snowflake animation */
         @keyframes snow {
             0% {
                 transform: translateY(-100vh) rotate(0deg);
@@ -50,84 +159,76 @@
             }
         }
 
-        /* Centered container */
-        .content {
-            text-align: center;
-            z-index: 1;
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #ffffff;
+            font-size: 1.5rem;
+            animation: snow 3s linear infinite;
         }
 
-        .title {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        /* Modal Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
         }
 
-        .description {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
-        .contact-image {
-            width: 300px;
-            height: 300px;
-            background-image: url('https://i.ibb.co/DMZjWsC/20240912-191246.jpg');
-            background-size: cover;
-            background-position: center;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-        }
-
-        .contact-image:hover {
-            transform: scale(1.1);
-        }
-
-        /* Snowflake animation */
-        .snowflake:nth-child(1) {
-            left: 10%;
-            animation-duration: 5s;
-        }
-
-        .snowflake:nth-child(2) {
-            left: 20%;
-            animation-duration: 6s;
-        }
-
-        .snowflake:nth-child(3) {
-            left: 30%;
-            animation-duration: 4.5s;
-        }
-
-        .snowflake:nth-child(4) {
-            left: 40%;
-            animation-duration: 5.5s;
-        }
-
-        .snowflake:nth-child(5) {
-            left: 50%;
-            animation-duration: 5s;
-        }
     </style>
 </head>
 <body>
+    <div class="film-grain"></div>
 
     <!-- Snowflakes -->
-    <div class="snowflake">❄️</div>
-    <div class="snowflake">❄️</div>
-    <div class="snowflake">❄️</div>
-    <div class="snowflake">❄️</div>
-    <div class="snowflake">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.5s; left: 10%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.8s; left: 20%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3s; left: 30%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.5s; left: 40%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.7s; left: 50%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3.2s; left: 60%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3.5s; left: 70%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.6s; left: 80%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 2.9s; left: 90%;">❄️</div>
+    <div class="snowflake" style="animation-duration: 3.1s; left: 100%;">❄️</div>
 
-    <!-- Main content -->
-    <div class="content">
-        <h1 class="title">Myschief - Winter Wonderland</h1>
-        <p class="description">A magical winter escape with Myschief!</p>
-        <div class="contact-image" onclick="window.location.href='mailto:contact@myschiefthecat.net';"></div>
+    <div class="container">
+        <h1 class="title">Contact Myschief</h1>
+        <div class="image-wrapper" onclick="showModal()">
+            <img class="image" 
+                 src="https://scontent-ord5-3.xx.fbcdn.net/v/t39.30808-6/242079396_10159778028034083_1638624113462830914_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tiEWAs5mmigQ7kNvgGUCTEQ&_nc_zt=23&_nc_ht=scontent-ord5-3.xx&_nc_gid=AWtuGIny9SuDYXLWJR1Q4Vi&oh=00_AYB1Ahu289KdjBeSepqj7Hkonxq2YqSB9wR5XjZRV6w73g&oe=6794F201" 
+                 alt="Myschief">
+        </div>
     </div>
 
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>do you want to contact Myschief via email?</h2>
+            <button onclick="location.href='mailto:contact@myschiefthecat.net'">yes</button>
+            <button onclick="closeModal()">no</button>
+        </div>
+    </div>
+
+    <script>
+        function showModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
