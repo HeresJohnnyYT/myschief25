@@ -7,10 +7,7 @@
     <script>
         // Mobile detection and redirect
         (function() {
-            // Check if the device is mobile
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
-            // Redirect if it's a mobile device
             if (isMobile) {
                 window.location.href = 'https://myschiefthecat.net/mobile.html';
             }
@@ -85,15 +82,7 @@
             box-shadow: 
                 0 25px 50px -12px rgba(0, 0, 0, 0.25),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
             z-index: 2;
-        }
-
-        .container:hover {
-            transform: 
-                rotateX(2deg) 
-                rotateY(2deg) 
-                translateZ(10px);
         }
 
         .title {
@@ -126,45 +115,23 @@
             right: -30px;
         }
 
-        .image-wrapper {
+        .image-slider {
             position: relative;
-            border-radius: 16px;
+            width: 100%;
+            max-width: 320px;
             overflow: hidden;
-            background: var(--background);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
 
-        .image-wrapper:hover {
-            transform: translateY(-4px);
+        .slide {
+            display: none;
+            width: 100%;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        .image {
+        .slide.active {
             display: block;
-            width: 100%;
-            height: auto;
-            transition: opacity 1.5s ease-in-out;
-        }
-
-        .image-hover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
-
-        .image-wrapper:hover .image {
-            opacity: 0;
-        }
-
-        .image-wrapper:hover .image-hover {
-            opacity: 1;
         }
 
         .modal {
@@ -187,14 +154,12 @@
             box-shadow: 
                 0 25px 50px -12px rgba(0, 0, 0, 0.25),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
-            animation: scaleUp 0.3s ease-out;
         }
 
         .modal-content h2 {
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
             font-weight: 600;
-            letter-spacing: -0.025em;
             color: var(--text);
             text-align: center;
         }
@@ -212,7 +177,6 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
-            min-width: 100px;
         }
 
         .button-primary {
@@ -224,45 +188,6 @@
             background: rgba(148, 163, 184, 0.1);
             color: var(--text);
         }
-
-        .button:hover {
-            transform: translateY(-2px);
-        }
-
-        .snowflake {
-            position: fixed;
-            color: white;
-            font-size: 1.2rem;
-            animation: snow linear infinite;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        @keyframes snow {
-            0% {
-                transform: translateY(-120vh) rotate(0deg);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(120vh) rotate(360deg);
-                opacity: 0.3;
-            }
-        }
-
-        @keyframes scaleUp {
-            0% {
-                transform: scale(0.95);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 <body>
@@ -273,11 +198,6 @@
         <div class="snowflake" style="animation-duration: 3.3s; left: 20%;">❅</div>
         <div class="snowflake" style="animation-duration: 3.6s; left: 30%;">❆</div>
         <div class="snowflake" style="animation-duration: 3.2s; left: 40%;">❄️</div>
-        <div class="snowflake" style="animation-duration: 3.5s; left: 50%;">❅</div>
-        <div class="snowflake" style="animation-duration: 3.8s; left: 60%;">❆</div>
-        <div class="snowflake" style="animation-duration: 3.4s; left: 70%;">❄️</div>
-        <div class="snowflake" style="animation-duration: 3.7s; left: 80%;">❅</div>
-        <div class="snowflake" style="animation-duration: 3.1s; left: 90%;">❆</div>
     </div>
 
     <a href="https://x.com/myschiefthecat" target="_blank" class="social-link">
@@ -286,53 +206,33 @@
 
     <div class="container">
         <h1 class="title">Myschief</h1>
-        <div class="image-wrapper" onclick="showModal()">
-            <img class="image" src="https://myschiefthecat.net/myschief.jpg" alt="Myschief">
-            <img class="image-hover" src="/2.png" alt="Myschief Alternate">
-        </div>
-    </div>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2>Would you like to contact Myschief?</h2>
-            <div class="modal-buttons">
-                <button onclick="closeModal()" class="button button-secondary">No</button>
-                <button onclick="location.href='mailto:contact@myschiefthecat.net'" class="button button-primary">Yes</button>
-            </div>
+        <div class="image-slider">
+            <img class="slide active" src="https://myschiefthecat.net/myschief.jpg" alt="Myschief">
+            <img class="slide" src="/2.png" alt="Myschief Alternate">
+            <img class="slide" src="/3.png" alt="Myschief Alternate 3">
         </div>
     </div>
 
     <script>
-        function showModal() {
-            document.getElementById('modal').style.display = 'flex';
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".slide");
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("active");
+                if (i === index) {
+                    slide.classList.add("active");
+                }
+            });
         }
 
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
         }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        // Create additional snowflakes
-        function createSnowflakes() {
-            const container = document.getElementById('snowflakes-container');
-            const symbols = ['❄️', '❅', '❆'];
-            for (let i = 0; i < 10; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                snowflake.style.left = `${Math.random() * 100}%`;
-                snowflake.style.animationDuration = `${3 + Math.random() * 2}s`;
-                snowflake.style.animationDelay = `${Math.random() * 2}s`;
-                container.appendChild(snowflake);
-            }
-        }
-        createSnowflakes();
+        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        showSlide(currentSlide);
     </script>
 </body>
 </html>
