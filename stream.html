@@ -1,89 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Cat Cam Streams</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #37474f;
-        }
-
-        .container {
-            text-align: center;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 90%;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin: 0;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #1565c0, #0097a7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .paw-print {
-            font-size: 24px;
-            color: #90a4ae;
-            margin: 10px;
-            opacity: 0.6;
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            color: #546e7a;
-            margin-top: 15px;
-        }
-
-        .decorative-line {
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, #1565c0, #0097a7);
-            margin: 20px auto;
-            border-radius: 2px;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .coming-soon {
-            font-size: 1.1em;
-            color: #78909c;
-            margin-top: 20px;
-            animation: float 3s ease-in-out infinite;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <span class="paw-print">🐾</span>
-        <h1>THIS PAGE IS FOR CAT CAM STREAMS...</h1>
-        <div class="decorative-line"></div>
-        <div class="subtitle">24/7 Feline Entertainment</div>
-        <span class="paw-print">🐾</span>
-        <div class="coming-soon">Live Streams Coming Soon</div>
-    </div>
-</body>
-</html>
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <iframe
+    src="https://player.twitch.tv/?channel=myschiefthecat&parent=myschiefthecat.net&autoplay=true&controls=false"
+    height="480"
+    width="854"
+    frameborder="0"
+    scrolling="no"
+    allowfullscreen>
+  </iframe>
+</div>
