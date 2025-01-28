@@ -7,7 +7,10 @@
     <script>
         // Mobile detection and redirect
         (function() {
+            // Check if the device is mobile
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // Redirect if it's a mobile device
             if (isMobile) {
                 window.location.href = 'https://myschiefthecat.net/mobile.html';
             }
@@ -123,7 +126,7 @@
             right: -30px;
         }
 
-        .slider-wrapper {
+        .image-wrapper {
             position: relative;
             border-radius: 16px;
             overflow: hidden;
@@ -132,47 +135,36 @@
                 0 8px 32px rgba(0, 0, 0, 0.2),
                 0 0 0 1px rgba(255, 255, 255, 0.05);
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        .slider {
-            display: flex;
-            width: 300%;
-            transition: transform 0.5s ease-in-out;
+        .image-wrapper:hover {
+            transform: translateY(-4px);
         }
 
-        .slide {
-            width: 33.333%;
+        .image {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: opacity 1.5s ease-in-out;
         }
 
-        .slide img {
+        .image-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            display: block;
-            object-fit: cover;
-            aspect-ratio: 1 / 1;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
 
-        .slider-nav {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 2;
+        .image-wrapper:hover .image {
+            opacity: 0;
         }
 
-        .slider-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .slider-dot.active {
-            background: white;
+        .image-wrapper:hover .image-hover {
+            opacity: 1;
         }
 
         .modal {
@@ -294,23 +286,9 @@
 
     <div class="container">
         <h1 class="title">Myschief</h1>
-        <div class="slider-wrapper" onclick="showModal()">
-            <div class="slider">
-                <div class="slide">
-                    <img src="https://myschiefthecat.net/myschief.jpg" alt="Myschief 1">
-                </div>
-                <div class="slide">
-                    <img src="/2.png" alt="Myschief 2">
-                </div>
-                <div class="slide">
-                    <img src="/3.png" alt="Myschief 3">
-                </div>
-            </div>
-            <div class="slider-nav">
-                <div class="slider-dot active" onclick="event.stopPropagation(); goToSlide(0)"></div>
-                <div class="slider-dot" onclick="event.stopPropagation(); goToSlide(1)"></div>
-                <div class="slider-dot" onclick="event.stopPropagation(); goToSlide(2)"></div>
-            </div>
+        <div class="image-wrapper" onclick="showModal()">
+            <img class="image" src="https://myschiefthecat.net/myschief.jpg" alt="Myschief">
+            <img class="image-hover" src="/2.png" alt="Myschief Alternate">
         </div>
     </div>
 
@@ -325,24 +303,6 @@
     </div>
 
     <script>
-        let currentSlide = 0;
-        const slider = document.querySelector('.slider');
-        const dots = document.querySelectorAll('.slider-dot');
-        
-        function goToSlide(n) {
-            currentSlide = n;
-            slider.style.transform = `translateX(-${currentSlide * 33.333}%)`;
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        // Auto-advance slides
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % 3;
-            goToSlide(currentSlide);
-        }, 3000);
-
         function showModal() {
             document.getElementById('modal').style.display = 'flex';
         }
