@@ -4,67 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ontario Income Tax Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #1a73e8;
+            --background-color: #f4f7f9;
+            --card-background: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #34d399;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
-            background-color: #f4f4f4;
-        }
-        .calculator {
-            background-color: white;
-            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+
+        .container {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
         h1 {
-            color: #333;
             text-align: center;
-            border-bottom: 2px solid #007bff;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
             padding-bottom: 10px;
         }
-        .input-group {
-            margin-bottom: 15px;
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
         }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
         input {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
-        button {
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+        }
+
+        .calculate-btn {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
+            padding: 14px;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            font-size: 16px;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        .calculate-btn:hover {
+            background-color: #1557b0;
+            transform: translateY(-2px);
         }
+
         #result {
-            margin-top: 20px;
-            padding: 15px;
             background-color: #f8f9fa;
-            border-radius: 4px;
-        }
-        .disclaimer {
-            font-size: 0.8em;
-            color: #666;
+            border-radius: 8px;
+            padding: 20px;
             margin-top: 20px;
+        }
+
+        #result h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        #result p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        #result p:last-child {
+            border-bottom: none;
+        }
+
+        .disclaimer {
             text-align: center;
+            color: #6c757d;
+            font-size: 0.8em;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 0 10px;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <h1>Ontario Income Tax Calculator</h1>
+    <div class="container">
+        <h1>Ontario Tax Calculator</h1>
+        
         <div class="input-group">
             <label for="income">Annual Income ($)</label>
             <input 
@@ -75,63 +166,65 @@
                 step="0.01"
             >
         </div>
-        <button onclick="calculateTax()">Calculate Taxes</button>
+        
+        <button class="calculate-btn" onclick="calculateTax()">Calculate Taxes</button>
+        
         <div id="result"></div>
     </div>
+
     <div class="disclaimer">
-        <p>Disclaimer: This calculator uses 2024 Ontario provincial tax rates for estimation purposes only.</p>
+        <p>Disclaimer: Uses 2024 Ontario provincial tax rates for estimation purposes.</p>
         <p>Consult a tax professional for precise calculations.</p>
     </div>
 
     <script>
         function calculateTax() {
-            // 2024 Ontario Tax Brackets
             var taxBrackets = [
                 { min: 0, max: 50197, rate: 0.0505 },
                 { min: 50197, max: 100392, rate: 0.0915 },
                 { min: 100392, max: 155625, rate: 0.1116 },
                 { min: 155625, max: 221708, rate: 0.1216 },
-                { min: 221708, max: Infinity, rate: 0.1316 }
+                { min: 221708, max: 1000000, rate: 0.1316 }
             ];
 
-            // Get income input
             var incomeInput = document.getElementById('income');
             var annualIncome = parseFloat(incomeInput.value);
             var resultDiv = document.getElementById('result');
 
-            // Validate input
             if (isNaN(annualIncome) || annualIncome < 0) {
                 resultDiv.innerHTML = '<p style="color:red;">Please enter a valid income amount.</p>';
                 return;
             }
 
-            // Calculate tax
             var totalTax = 0;
             var remainingIncome = annualIncome;
 
             for (var i = 0; i < taxBrackets.length; i++) {
                 var bracket = taxBrackets[i];
+                var bracketMax = bracket.max;
+                
                 var taxableAmount = Math.min(
                     remainingIncome, 
-                    Math.max(0, bracket.max - bracket.min)
+                    Math.max(0, bracketMax - bracket.min)
                 );
-                totalTax += taxableAmount * bracket.rate;
-                remainingIncome -= taxableAmount;
+                
+                totalTax = totalTax + (taxableAmount * bracket.rate);
+                remainingIncome = remainingIncome - taxableAmount;
 
-                if (remainingIncome <= 0) break;
+                if (remainingIncome <= 0) {
+                    break;
+                }
             }
 
-            // Calculate results
             var netIncome = annualIncome - totalTax;
             var effectiveTaxRate = (totalTax / annualIncome) * 100;
 
-            // Display results
             resultDiv.innerHTML = 
                 '<h3>Tax Calculation Results</h3>' +
-                '<p><strong>Total Annual Income:</strong> $' + annualIncome.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</p>' +
-                '<p><strong>Total Provincial Tax:</strong> $' + totalTax.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</p>' +
-                '<p><strong>Net Income After Tax:</strong> $' + netIncome.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</p>' +
-                '<p><strong>Effective Tax Rate:</strong> ' + effectiveTaxRate.toFixed(2) + '%</p>';
+                '<p><span>Total Annual Income</span><strong>$' + annualIncome.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</strong></p>' +
+                '<p><span>Total Provincial Tax</span><strong>$' + totalTax.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</strong></p>' +
+                '<p><span>Net Income After Tax</span><strong>$' + netIncome.toLocaleString('en-CA', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</strong></p>' +
+                '<p><span>Effective Tax Rate</span><strong>' + effectiveTaxRate.toFixed(2) + '%</strong></p>';
         }
     </script>
 </body>
