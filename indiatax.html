@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Income Tax Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --background-color: #f4f7f9;
+            --card-background: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #34d399;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculate-btn:hover {
+            background-color: #1557b0;
+        }
+
+        #tax-breakdown {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .added-location {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+        }
+
+        .remove-location {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .disclaimer {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.8em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    
+        
+        <div class="input-group">
+            <label for="income">Annual Income (₹)</label>
+            <input 
+                type="number" 
+                id="income" 
+                placeholder="Enter your total annual income" 
+                min="0" 
+                step="0.01"
+            >
+        </div>
+
+        <div class="input-group">
+            <label for="state">Select State</label>
+            <select id="state">
+                <option value="">Select a State</option>
+                <option value="andhra-pradesh">Andhra Pradesh</option>
+                <option value="arunachal-pradesh">Arunachal Pradesh</option>
+                <option value="assam">Assam</option>
+                <option value="bihar">Bihar</option>
+                <option value="chhattisgarh">Chhattisgarh</option>
+                <option value="goa">Goa</option>
+                <option value="gujarat">Gujarat</option>
+                <option value="haryana">Haryana</option>
+                <option value="himachal-pradesh">Himachal Pradesh</option>
+                <option value="jharkhand">Jharkhand</option>
+                <option value="karnataka">Karnataka</option>
+                <option value="kerala">Kerala</option>
+                <option value="madhya-pradesh">Madhya Pradesh</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="manipur">Manipur</option>
+                <option value="meghalaya">Meghalaya</option>
+                <option value="mizoram">Mizoram</option>
+                <option value="nagaland">Nagaland</option>
+                <option value="odisha">Odisha</option>
+                <option value="punjab">Punjab</option>
+                <option value="rajasthan">Rajasthan</option>
+                <option value="sikkim">Sikkim</option>
+                <option value="tamil-nadu">Tamil Nadu</option>
+                <option value="telangana">Telangana</option>
+                <option value="tripura">Tripura</option>
+                <option value="uttar-pradesh">Uttar Pradesh</option>
+                <option value="uttarakhand">Uttarakhand</option>
+                <option value="west-bengal">West Bengal</option>
+                <option value="delhi">Delhi</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="bangalore">Bangalore</option>
+            </select>
+        </div>
+
+        <button id="add-location-btn" class="calculate-btn">Add Location</button>
+
+        <div id="added-locations"></div>
+
+        <button onclick="calculateTax()" class="calculate-btn" style="margin-top: 20px;">Calculate Total Taxes</button>
+
+        <div id="tax-breakdown"></div>
+    </div>
+
+    <div class="disclaimer">
+        <p>Disclaimer: This calculator provides tax estimations based on 2023-2024 rates.</p>
+        <p>Actual tax liabilities may vary. Consult a tax professional for precise calculations.</p>
+    </div>
+
+    <script>
+        // State-specific tax variations (simplified)
+        const stateTaxVariations = {
+            'maharashtra': { surcharge: 0.01 },
+            'delhi': { surcharge: 0.005 },
+            'karnataka': { surcharge: 0.015 },
+            'tamil-nadu': { surcharge: 0.02 },
+            'west-bengal': { surcharge: 0.025 }
+        };
+
+        // National tax brackets (New Regime 2023-24)
+        const nationalTaxBrackets = [
+            { min: 0, max: 300000, rate: 0 },
+            { min: 300000, max: 600000, rate: 0.05 },
+            { min: 600000, max: 900000, rate: 0.10 },
+            { min: 900000, max: 1200000, rate: 0.15 },
+            { min: 1200000, max: 1500000, rate: 0.20 },
+            { min: 1500000, max: 1800000, rate: 0.25 },
+            { min: 1800000, max: Infinity, rate: 0.30 }
+        ];
+
+        // Add Location Button Event Listener
+        document.getElementById('add-location-btn').addEventListener('click', function() {
+            const stateSelect = document.getElementById('state');
+            const selectedState = stateSelect.value;
+            const selectedStateName = stateSelect.options[stateSelect.selectedIndex].text;
+
+            if (selectedState && !document.querySelector(`.added-location[data-state="${selectedState}"]`)) {
+                const addedLocationsDiv = document.getElementById('added-locations');
+                const locationDiv = document.createElement('div');
+                locationDiv.className = 'added-location';
+                locationDiv.setAttribute('data-state', selectedState);
+                locationDiv.innerHTML = `
+                    <span>${selectedStateName}</span>
+                    <button class="remove-location" onclick="removeLocation(this)">Remove</button>
+                `;
+                addedLocationsDiv.appendChild(locationDiv);
+                stateSelect.value = '';
+            } else if (document.querySelector(`.added-location[data-state="${selectedState}"]`)) {
+                alert('This location is already added.');
+            }
+        });
+
+        // Remove Location Function
+        function removeLocation(button) {
+            button.closest('.added-location').remove();
+        }
+
+        // Tax Calculation Function
+        function calculateTax() {
+            const incomeInput = document.getElementById('income');
+            const taxBreakdownDiv = document.getElementById('tax-breakdown');
+            const annualIncome = parseFloat(incomeInput.value);
+            const addedLocations = document.querySelectorAll('.added-location');
+
+            if (isNaN(annualIncome) || annualIncome < 0) {
+                taxBreakdownDiv.innerHTML = '<p style="color:red;">Please enter a valid income amount.</p>';
+                return;
+            }
+
+            if (addedLocations.length === 0) {
+                taxBreakdownDiv.innerHTML = '<p style="color:red;">Please add at least one location.</p>';
+                return;
+            }
+
+            // Calculate national income tax
+            let totalTax = 0;
+            let remainingIncome = annualIncome;
+
+            for (let bracket of nationalTaxBrackets) {
+                const taxableAmount = Math.min(
+                    remainingIncome, 
+                    Math.max(0, bracket.max - bracket.min)
+                );
+                
+                totalTax += taxableAmount * bracket.rate;
+                remainingIncome -= taxableAmount;
+
+                if (remainingIncome <= 0) break;
+            }
+
+            // Add Health and Education Cess
+            const cessRate = 0.04;
+            const cess = totalTax * cessRate;
+            totalTax += cess;
+
+            // Apply state-specific surcharges
+            let totalSurcharge = 0;
+            addedLocations.forEach(location => {
+                const state = location.getAttribute('data-state');
+                const stateVariation = stateTaxVariations[state];
+                
+                if (stateVariation && stateVariation.surcharge) {
+                    const stateSurcharge = totalTax * stateVariation.surcharge;
+                    totalSurcharge += stateSurcharge;
+                }
+            });
+
+            totalTax += totalSurcharge;
+
+            const netIncome = annualIncome - totalTax;
+            const effectiveTaxRate = (totalTax / annualIncome) * 100;
+
+            // Display detailed breakdown
+            taxBreakdownDiv.innerHTML = `
+                <h3>Comprehensive Tax Breakdown</h3>
+                <p><strong>Total Annual Income:</strong> ₹${annualIncome.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p><strong>Base Income Tax:</strong> ₹${(totalTax - cess - totalSurcharge).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p><strong>Health and Education Cess (4%):</strong> ₹${cess.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p><strong>State Surcharges:</strong> ₹${totalSurcharge.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p><strong>Total Tax Liability:</strong> ₹${totalTax.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p><strong>Net Income After Tax:</strong> ₹${netIncome.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p><strong>Effective Tax Rate:</strong> ${effectiveTaxRate.toFixed(2)}%</p>
+            `;
+        }
+    </script>
+</body>
+</html>
