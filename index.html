@@ -32,18 +32,19 @@
         }
 
         .container {
-            padding: 1.75rem;
-            width: 320px;
+            width: 90%;
+            max-width: 500px;
             background: var(--card);
             border-radius: 24px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             text-align: center;
+            padding: 1.5rem;
         }
 
         .title {
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 1.75rem;
+            margin-bottom: 1rem;
             letter-spacing: -0.025em;
             background: linear-gradient(135deg, var(--text) 0%, #60a5fa 100%);
             -webkit-background-clip: text;
@@ -52,7 +53,9 @@
 
         .slider {
             position: relative;
+            width: 100%;
             max-width: 100%;
+            height: auto;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -66,12 +69,49 @@
 
         .slides img {
             width: 100%;
-            display: block;
+            height: auto;
+            object-fit: contain;
+            border-radius: 16px;
         }
 
         .contact {
             margin-top: 20px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 12px 24px;
             font-size: 18px;
+            font-weight: 500;
+            color: var(--text);
+            background: rgba(148, 163, 184, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+
+            .title {
+                font-size: 1.75rem;
+            }
+
+            .contact-button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
         }
 
     </style>
@@ -87,7 +127,7 @@
             </div>
         </div>
         <div class="contact">
-            Contact: <a href="mailto:contact@myschiefthecat.net">contact@myschiefthecat.net</a>
+            <a href="mailto:contact@myschiefthecat.net" class="contact-button">Contact Myschief</a>
         </div>
     </div>
 
