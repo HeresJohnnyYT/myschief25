@@ -1,162 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myschief</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --background: #0f172a;
-            --card: #1e293b;
-            --text: #f8fafc;
-            --primary: #3b82f6;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Myschief Coin (MYSC)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4b3f72;
+      --secondary: #fef6e4;
+      --accent: #ff8906;
+      --bg: #f9fafb;
+      --text: #1f2937;
+      --light: #ffffff;
+      --dark: #1a1a1a;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: var(--background);
-            font-family: 'Inter', system-ui, sans-serif;
-            color: var(--text);
-            overflow-x: hidden;
-            padding: 10px;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .container {
-            width: 90%;
-            max-width: 400px;
-            background: var(--card);
-            border-radius: 16px;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            padding: 1rem;
-        }
+    body {
+      font-family: 'Rubik', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-        .title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text) 0%, #60a5fa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    header {
+      background: linear-gradient(135deg, var(--primary), #6a4f95);
+      color: white;
+      padding: 4rem 1.5rem 6rem;
+      text-align: center;
+      position: relative;
+    }
 
-        .slider {
-            position: relative;
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        }
+    nav {
+      position: sticky;
+      top: 0;
+      background: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      z-index: 1000;
+    }
 
-        .slides {
-            display: flex;
-            width: 200%;
-            transition: transform 1s ease-in-out;
-        }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
 
-        .slides img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 12px;
-        }
+    nav a:hover {
+      color: var(--accent);
+    }
 
-        .contact {
-            margin-top: 15px;
-        }
+    .hero {
+      max-width: 1200px;
+      margin: -4rem auto 4rem;
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
 
-        .contact-button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text);
-            background: rgba(148, 163, 184, 0.1);
-            border: 2px solid var(--primary);
-            border-radius: 10px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+    .hero-text {
+      flex: 1;
+    }
 
-        .contact-button:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
-        }
+    .hero-text h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
 
-        /* Mobile Styles */
-        @media (max-width: 600px) {
-            .container {
-                width: 85%;
-                max-width: 180px;
-                padding: 0.5rem;
-            }
+    .hero-text p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
 
-            .title {
-                font-size: 0.8rem;
-            }
+    .hero-text a {
+      background: var(--accent);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
 
-            .contact-button {
-                font-size: 10px;
-                padding: 5px 10px;
-            }
-        }
+    .hero-text a:hover {
+      background: #e77d00;
+    }
 
-        /* Desktop Styles */
-        @media (min-width: 1024px) {
-            .container {
-                max-width: 500px;
-                padding: 2rem;
-            }
+    .hero-image img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
 
-            .title {
-                font-size: 2.2rem;
-            }
+    .section {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
 
-            .contact-button {
-                font-size: 18px;
-                padding: 12px 24px;
-            }
-        }
+    .section h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
 
-    </style>
+    .section p {
+      font-size: 1.125rem;
+      color: #374151;
+      margin-bottom: 1rem;
+    }
+
+    .tokenomics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .token-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .token-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .token-card p {
+      font-size: 1rem;
+    }
+
+    .social {
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+
+    .social a {
+      font-size: 1.25rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .social a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1 class="title">Myschief</h1>
-        <div class="slider">
-            <div class="slides">
-                <img src="FB_IMG_1742496746328.jpg" alt="Myschief Image 1">
-                <img src="FB_IMG_1742496751556.jpg" alt="Myschief Image 2">
-            </div>
-        </div>
-        <div class="contact">
-            <a href="mailto:contact@myschiefthecat.net" class="contact-button">Contact Myschief</a>
-        </div>
+  <nav>
+    <div><strong>MYSC</strong></div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#social">Social</a>
     </div>
+  </nav>
 
-    <script>
-        const slides = document.querySelector('.slides');
-        let index = 0;
+  <header>
+    <h1>Myschief Coin (MYSC)</h1>
+    <p>The purr-fect token for mischievous minds</p>
+  </header>
 
-        setInterval(() => {
-            index = (index + 1) % 2;
-            slides.style.transform = `translateX(${-index * 100}%)`;
-        }, 3000);
-    </script>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Join the Myschief Movement</h1>
+      <p>Built on curiosity and powered by community, MYSC is the token that rewards clever paws and playful minds.</p>
+      <a href="#tokenomics">View Tokenomics</a>
+    </div>
+    <div class="hero-image">
+      <img src="/mnt/data/ChatGPT Image May 5, 2025, 01_04_14 AM.png" alt="Myschief Cat" />
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About Myschief Coin</h2>
+    <p>Myschief Coin (MYSC) is a meme token inspired by a real-life feline mastermind. It's not just a token — it's a symbol of fun, freedom, and feline-level cleverness. Whether you're in for the vibes or the utility, you're part of a smart and mischievous tribe.</p>
+  </section>
+
+  <section class="section" id="tokenomics">
+    <h2>Tokenomics</h2>
+    <div class="tokenomics">
+      <div class="token-card">
+        <h3>Supply</h3>
+        <p>1,000,000,000 MYSC</p>
+      </div>
+      <div class="token-card">
+        <h3>Liquidity</h3>
+        <p>80% locked</p>
+      </div>
+      <div class="token-card">
+        <h3>Marketing</h3>
+        <p>10% for growth & community</p>
+      </div>
+      <div class="token-card">
+        <h3>Team</h3>
+        <p>5% with 12-month vesting</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="social" id="social">
+    <p>Follow us on <a href="https://x.com/myschiefcoin" target="_blank">X (formerly Twitter)</a></p>
+  </section>
+
+  <footer>
+    &copy; 2025 Myschief Coin — All rights reserved.
+  </footer>
 
 </body>
 </html>
