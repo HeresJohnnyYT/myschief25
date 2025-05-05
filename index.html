@@ -12,8 +12,6 @@
       --accent: #ff8906;
       --bg: #f9fafb;
       --text: #1f2937;
-      --light: #ffffff;
-      --dark: #1a1a1a;
     }
 
     * {
@@ -31,14 +29,6 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-    }
-
-    header {
-      background: linear-gradient(135deg, var(--primary), #6a4f95);
-      color: white;
-      padding: 4rem 1.5rem 6rem;
-      text-align: center;
-      position: relative;
     }
 
     nav {
@@ -65,10 +55,27 @@
       color: var(--accent);
     }
 
+    header {
+      background: linear-gradient(135deg, var(--primary), #6a4f95);
+      color: white;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+    }
+
     .hero {
       max-width: 1200px;
-      margin: -4rem auto 4rem;
-      padding: 2rem;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -80,8 +87,8 @@
       flex: 1;
     }
 
-    .hero-text h1 {
-      font-size: 3rem;
+    .hero-text h2 {
+      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
@@ -118,7 +125,7 @@
     }
 
     .section h2 {
-      font-size: 2.5rem;
+      font-size: 2.25rem;
       color: var(--primary);
       margin-bottom: 1rem;
     }
@@ -127,31 +134,6 @@
       font-size: 1.125rem;
       color: #374151;
       margin-bottom: 1rem;
-    }
-
-    .tokenomics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .token-card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.05);
-      text-align: center;
-    }
-
-    .token-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--accent);
-    }
-
-    .token-card p {
-      font-size: 1rem;
     }
 
     .social {
@@ -177,7 +159,6 @@
       text-align: center;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .hero {
         flex-direction: column;
@@ -192,7 +173,6 @@
     <div><strong>MYSC</strong></div>
     <div>
       <a href="#about">About</a>
-      <a href="#tokenomics">Tokenomics</a>
       <a href="#social">Social</a>
     </div>
   </nav>
@@ -204,9 +184,9 @@
 
   <section class="hero">
     <div class="hero-text">
-      <h1>Join the Myschief Movement</h1>
+      <h2>Join the Myschief Movement</h2>
       <p>Built on curiosity and powered by community, MYSC is the token that rewards clever paws and playful minds.</p>
-      <a href="#tokenomics">View Tokenomics</a>
+      <a href="#about">Learn More</a>
     </div>
     <div class="hero-image">
       <img src="/mnt/data/ChatGPT Image May 5, 2025, 01_04_14 AM.png" alt="Myschief Cat" />
@@ -216,28 +196,6 @@
   <section class="section" id="about">
     <h2>About Myschief Coin</h2>
     <p>Myschief Coin (MYSC) is a meme token inspired by a real-life feline mastermind. It's not just a token — it's a symbol of fun, freedom, and feline-level cleverness. Whether you're in for the vibes or the utility, you're part of a smart and mischievous tribe.</p>
-  </section>
-
-  <section class="section" id="tokenomics">
-    <h2>Tokenomics</h2>
-    <div class="tokenomics">
-      <div class="token-card">
-        <h3>Supply</h3>
-        <p>1,000,000,000 MYSC</p>
-      </div>
-      <div class="token-card">
-        <h3>Liquidity</h3>
-        <p>80% locked</p>
-      </div>
-      <div class="token-card">
-        <h3>Marketing</h3>
-        <p>10% for growth & community</p>
-      </div>
-      <div class="token-card">
-        <h3>Team</h3>
-        <p>5% with 12-month vesting</p>
-      </div>
-    </div>
   </section>
 
   <section class="social" id="social">
