@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Myschief Coin (MYSC)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #4b3f72;
-      --secondary: #fef6e4;
       --accent: #ff8906;
       --bg: #f9fafb;
       --text: #1f2937;
@@ -18,10 +17,6 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     body {
@@ -55,21 +50,53 @@
       color: var(--accent);
     }
 
-    header {
-      background: linear-gradient(135deg, var(--primary), #6a4f95);
+    .myschief-header {
+      background: radial-gradient(circle at top left, #6a4f95, var(--primary));
       color: white;
-      padding: 4rem 1.5rem;
+      padding: 5rem 1.5rem 6rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    .myschief-header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: -60px;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%);
+      transform: rotate(25deg);
+      z-index: 0;
     }
 
-    header p {
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .myschief-header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+    }
+
+    .myschief-header .highlight {
+      color: var(--accent);
+    }
+
+    .myschief-header .ticker {
+      font-size: 1.5rem;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    .myschief-header .tagline {
       font-size: 1.25rem;
       opacity: 0.9;
+      margin-top: 0.5rem;
     }
 
     .hero {
@@ -164,6 +191,14 @@
         flex-direction: column;
         text-align: center;
       }
+
+      .myschief-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .myschief-header .tagline {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
@@ -177,9 +212,11 @@
     </div>
   </nav>
 
-  <header>
-    <h1>Myschief Coin (MYSC)</h1>
-    <p>The purr-fect token for mischievous minds</p>
+  <header class="myschief-header">
+    <div class="header-content">
+      <h1><span class="highlight">Myschief Coin</span> <span class="ticker">(MYSC)</span></h1>
+      <p class="tagline">The purr-fect token for mischievous minds 🐾</p>
+    </div>
   </header>
 
   <section class="hero">
